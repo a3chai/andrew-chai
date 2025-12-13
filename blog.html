@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog posts about hardware engineering, travel, and learning">
+    <title>Blog | Andrew</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">andrew<span>.</span></a>
+
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Blog</h1>
+            <p>Placeholder Text</p>
+        </div>
+    </header>
+
+    <!-- Blog Content -->
+    <main class="section">
+        <div class="container">
+            <div class="blog-grid">
+
+                <!-- Blog Post 1 -->
+                <article class="blog-card fade-in">
+                    <div class="blog-image">
+                        <img src="images/blog/europe-trip.jpg" alt="Swiss Alps"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--color-text-muted);\'>Image placeholder</div>'">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-meta">December 2024 &bull; 8 min read</span>
+                        <h3 class="blog-title">Blog 1</h3>
+                        <p class="blog-excerpt">
+                            Text for blog 1
+                            Add something neat here
+                        </p>
+                        <a href="blog/europe-trip-planning.html" class="blog-link">
+                            Read More
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="blog-card fade-in">
+                    <div class="blog-image">
+                        <img src="images/blog/mandarin.jpg" alt="Chinese characters"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--color-text-muted);\'>Image placeholder</div>'">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-meta">November 2024 &bull; 5 min read</span>
+                        <h3 class="blog-title">Blog 2</h3>
+                        <p class="blog-excerpt">
+                            Text for blog 2
+                            Add something neat here
+                        </p>
+                        <a href="blog/learning-mandarin.html" class="blog-link">
+                            Read More
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="blog-card fade-in">
+                    <div class="blog-image">
+                        <img src="images/blog/fpga-workflow.jpg" alt="FPGA development setup"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--color-text-muted);\'>Image placeholder</div>'">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-meta">October 2024 &bull; 12 min read</span>
+                        <h3 class="blog-title">Optimizing My FPGA Build Workflow</h3>
+                        <p class="blog-excerpt">
+                            Vivado builds taking too long? Here's how I set up incremental compilation,
+                            TCL scripting, and remote synthesis to speed up my development cycle.
+                        </p>
+                        <a href="blog/fpga-workflow.html" class="blog-link">
+                            Read More
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Andrew. Built with vanilla HTML, CSS, and JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

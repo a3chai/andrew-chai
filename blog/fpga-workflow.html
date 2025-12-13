@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How to speed up FPGA development with incremental compilation, TCL scripting, and remote synthesis">
+    <title>Optimizing My FPGA Build Workflow | Andrew</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">andrew<span>.</span></a>
+
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../blog.html" class="active">Blog</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header container">
+        <a href="../blog.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Blog
+        </a>
+
+        <h1>Optimizing My FPGA Build Workflow</h1>
+
+        <div class="article-meta">
+            <span>October 2024</span>
+            <span>12 min read</span>
+        </div>
+    </header>
+
+    <!-- Hero Image -->
+    <div class="article-hero container">
+        <img src="../images/blog/fpga-workflow.jpg" alt="FPGA development setup"
+             onerror="this.style.display='none'">
+    </div>
+
+    <!-- Article Content -->
+    <article class="article-content container">
+
+        <p>
+            If you've worked with Xilinx Vivado on any non-trivial project, you know the pain: synthesis takes
+            20 minutes, implementation takes another 40, and suddenly half your day is gone waiting for builds.
+            Here's how I've optimized my workflow to get faster iteration cycles without sacrificing quality.
+        </p>
+
+        <h2>The Problem</h2>
+
+        <p>
+            Working with Xilinx UltraScale+ FPGAs, my typical build times were:
+        </p>
+
+        <ul>
+            <li><strong>Synthesis:</strong> 15-25 minutes</li>
+            <li><strong>Implementation:</strong> 30-50 minutes</li>
+            <li><strong>Bitstream generation:</strong> 5-10 minutes</li>
+        </ul>
+
+        <p>
+            That's potentially 85 minutes for a single iteration. Make a typo in your HDL? That's another
+            85-minute wait. This is not sustainable for productive development.
+        </p>
+
+        <h2>Solution 1: Incremental Compilation</h2>
+
+        <p>
+            Vivado supports incremental synthesis and implementation, but it's not enabled by default and
+            requires some setup. The idea is simple: reuse results from previous runs for unchanged modules.
+        </p>
+
+        <h3>Setting Up Incremental Synthesis</h3>
+
+        <p>
+            First, enable incremental synthesis in your project settings:
+        </p>
+
+        <pre><code># In your TCL script or Vivado console
+set_property INCREMENTAL_CHECKPOINT path/to/reference.dcp [current_design]
+set_property AUTO_INCREMENTAL_CHECKPOINT 1 [current_design]</code></pre>
+
+        <p>
+            The key is maintaining a reference checkpoint from a known-good build. Vivado will compare your
+            current design against this checkpoint and only resynthesize changed modules.
+        </p>
+
+        <h3>Incremental Implementation</h3>
+
+        <p>
+            For implementation, you need a reference checkpoint from a fully placed and routed design:
+        </p>
+
+        <pre><code>set_property INCREMENTAL_CHECKPOINT path/to/routed.dcp [get_runs impl_1]</code></pre>
+
+        <p>
+            This typically gives me 40-60% reduction in implementation time for small changes. The caveat:
+            if you change something fundamental (clock structure, major block moves), it falls back to
+            full implementation.
+        </p>
+
+        <h2>Solution 2: TCL Scripting Everything</h2>
+
+        <p>
+            The Vivado GUI is convenient for exploration, but it's slow and non-reproducible for actual builds.
+            I've moved to a fully scripted workflow using TCL.
+        </p>
+
+        <h3>Project Structure</h3>
+
+        <pre><code>project/
+├── src/
+│   ├── rtl/          # Verilog/VHDL sources
+│   ├── constraints/  # XDC timing constraints
+│   └── ip/           # IP configurations
+├── scripts/
+│   ├── build.tcl     # Main build script
+│   ├── synth.tcl     # Synthesis settings
+│   └── impl.tcl      # Implementation settings
+└── output/           # Build artifacts</code></pre>
+
+        <h3>The Build Script</h3>
+
+        <p>
+            My <code>build.tcl</code> handles everything from source file collection to bitstream generation:
+        </p>
+
+        <pre><code># build.tcl - Main build script
+set project_name "my_project"
+set part "xczu7ev-ffvc1156-2-e"
+
+# Create project in memory (faster than on-disk)
+create_project -in_memory -part $part
+
+# Add sources
+add_files -fileset sources_1 [glob src/rtl/*.v]
+add_files -fileset constrs_1 [glob src/constraints/*.xdc]
+
+# Run synthesis
+source scripts/synth.tcl
+synth_design -top top_module
+
+# Run implementation
+source scripts/impl.tcl
+opt_design
+place_design
+route_design
+
+# Generate bitstream
+write_bitstream -force output/${project_name}.bit</code></pre>
+
+        <p>
+            Running <code>vivado -mode batch -source scripts/build.tcl</code> gives me reproducible builds
+            that can run headless on any machine.
+        </p>
+
+        <h2>Solution 3: Remote Build Server</h2>
+
+        <p>
+            My laptop is fine for editing code, but it's not ideal for running massive place-and-route
+            algorithms. I set up a remote build server with better specs and run builds over SSH.
+        </p>
+
+        <h3>The Setup</h3>
+
+        <ul>
+            <li>Remote server with 32 cores and 128GB RAM (old workstation)</li>
+            <li>Vivado installed on the server</li>
+            <li>Project files synced via rsync or git</li>
+            <li>Builds triggered via SSH</li>
+        </ul>
+
+        <h3>The Workflow</h3>
+
+        <pre><code># Sync sources to build server
+rsync -avz --exclude='*.dcp' --exclude='*.bit' \
+    ./project/ buildserver:~/fpga/project/
+
+# Trigger build remotely
+ssh buildserver "cd ~/fpga/project && \
+    vivado -mode batch -source scripts/build.tcl" &
+
+# Continue working locally while build runs...</code></pre>
+
+        <p>
+            With 32 cores vs my laptop's 8, synthesis time dropped from 20 minutes to 8 minutes.
+            Implementation improved similarly. The parallel build means I can continue editing
+            while the server crunches numbers.
+        </p>
+
+        <h2>Solution 4: Out-of-Context Synthesis</h2>
+
+        <p>
+            For large designs with multiple IP blocks, out-of-context (OOC) synthesis is a game-changer.
+            Each IP block gets synthesized independently and cached.
+        </p>
+
+        <pre><code># Mark a module for out-of-context synthesis
+set_property USED_IN {synthesis out_of_context} \
+    [get_files src/rtl/dsp_block.v]</code></pre>
+
+        <p>
+            The first build takes longer, but subsequent builds reuse the OOC netlists. If you're
+            iterating on top-level integration and not touching the IP blocks, this saves massive time.
+        </p>
+
+        <h2>Solution 5: Simulation-First Development</h2>
+
+        <p>
+            The best way to speed up builds is to do fewer of them. I've shifted to doing more verification
+            in simulation before touching hardware.
+        </p>
+
+        <blockquote>
+            <p>
+                "Catching a bug in simulation costs minutes. Catching it after place-and-route costs hours.
+                Catching it in hardware costs days."
+            </p>
+        </blockquote>
+
+        <p>
+            My current flow:
+        </p>
+
+        <ul>
+            <li><strong>Unit tests in simulation</strong> - Quick feedback for individual modules</li>
+            <li><strong>Integration tests</strong> - Verify module interfaces before synthesis</li>
+            <li><strong>Formal verification</strong> - For critical control logic (using SymbiYosys)</li>
+            <li><strong>Hardware build</strong> - Only when simulation is clean</li>
+        </ul>
+
+        <h2>Results</h2>
+
+        <p>
+            With all these optimizations combined, my typical iteration cycle went from 85 minutes to:
+        </p>
+
+        <ul>
+            <li><strong>Small RTL change:</strong> 12-18 minutes (incremental build)</li>
+            <li><strong>IP block change:</strong> 25-35 minutes (partial OOC rebuild)</li>
+            <li><strong>Full rebuild:</strong> 35-45 minutes (on build server)</li>
+        </ul>
+
+        <p>
+            That's a 2-3x improvement for most iterations. More importantly, the remote build means I'm
+            not blocked - I can keep working while builds run in the background.
+        </p>
+
+        <h2>What's Next</h2>
+
+        <p>
+            I'm currently exploring:
+        </p>
+
+        <ul>
+            <li><strong>Vivado's synthesis directives</strong> - Fine-tuning for better timing closure</li>
+            <li><strong>Abstract shell flows</strong> - For even faster platform development</li>
+            <li><strong>Cloud builds</strong> - AWS F1 instances have Vivado pre-installed</li>
+        </ul>
+
+        <p>
+            FPGA development doesn't have to be a waiting game. With the right infrastructure, you can
+            iterate almost as quickly as software development. Almost.
+        </p>
+
+        <!-- Tags -->
+        <div class="article-tags">
+            <span class="article-tag">FPGA</span>
+            <span class="article-tag">Vivado</span>
+            <span class="article-tag">Workflow</span>
+            <span class="article-tag">Xilinx</span>
+        </div>
+
+    </article>
+
+    <!-- Post Navigation -->
+    <nav class="post-nav container">
+        <a href="learning-mandarin.html" class="prev">
+            <span class="label">Previous Post</span>
+            <span class="title">Learning Mandarin as an Engineer</span>
+        </a>
+        <a href="modern-cpp-features.html" class="next">
+            <span class="label">Next Post</span>
+            <span class="title">Modern C++ Features I Actually Use</span>
+        </a>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Andrew. Built with vanilla HTML, CSS, and JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hardware design projects - FPGA development boards, data acquisition systems, and custom PCBs">
+    <title>Projects | Andrew</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">andrew<span>.</span></a>
+
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Projects</h1>
+            <p>Hardware designs featuring interactive PCB viewers powered by Altium 365</p>
+        </div>
+    </header>
+
+    <!-- Projects Content -->
+    <main class="section">
+        <div class="container">
+
+            <!-- FPGA Projects -->
+            <div class="projects-category">
+                <h2>FPGA Development</h2>
+                <div class="projects-grid">
+                    <article class="project-card fade-in">
+                        <div class="project-image">
+                            <img src="images/projects/fpga-board.jpg" alt="FPGA Development Board"
+                                 onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--color-text-muted);\'>Image placeholder</div>'">
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">FPGA</span>
+                            <h3 class="project-title">FPGA Development Board</h3>
+                            <p class="project-description">
+                                Custom carrier board for Xilinx Ultrascale+ SoM with high-speed interfaces,
+                                DDR4 memory, and multiple I/O options.
+                            </p>
+                            <div class="project-tags">
+                                <span class="project-tag">Xilinx</span>
+                                <span class="project-tag">DDR4</span>
+                                <span class="project-tag">High-Speed</span>
+                                <span class="project-tag">12-Layer</span>
+                            </div>
+                            <a href="projects/fpga-dev-board.html" class="project-link">
+                                View Project
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Placeholder for future project -->
+                    <article class="project-card placeholder fade-in">
+                        <div class="project-image">
+                            <span class="text-muted">Coming Soon</span>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">FPGA</span>
+                            <h3 class="project-title">High-Speed ADC Interface</h3>
+                            <p class="project-description">
+                                JESD204B interface board for high-speed ADC data capture with FPGA processing.
+                            </p>
+                            <div class="project-tags">
+                                <span class="project-tag">JESD204B</span>
+                                <span class="project-tag">ADC</span>
+                                <span class="project-tag">GSPS</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Data Acquisition Projects -->
+            <div class="projects-category">
+                <h2>Data Acquisition</h2>
+                <div class="projects-grid">
+                    <article class="project-card fade-in">
+                        <div class="project-image">
+                            <img src="images/projects/strain-gauge.jpg" alt="Strain Gauge Data Logger"
+                                 onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--color-text-muted);\'>Image placeholder</div>'">
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">Data Acquisition</span>
+                            <h3 class="project-title">Strain Gauge Data Logger</h3>
+                            <p class="project-description">
+                                Multi-channel precision data acquisition system for strain gauge measurements
+                                with 24-bit ADCs and real-time processing.
+                            </p>
+                            <div class="project-tags">
+                                <span class="project-tag">24-bit ADC</span>
+                                <span class="project-tag">Wheatstone Bridge</span>
+                                <span class="project-tag">USB</span>
+                            </div>
+                            <a href="projects/strain-gauge-logger.html" class="project-link">
+                                View Project
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card placeholder fade-in">
+                        <div class="project-image">
+                            <span class="text-muted">Coming Soon</span>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">Data Acquisition</span>
+                            <h3 class="project-title">Thermocouple Interface</h3>
+                            <p class="project-description">
+                                8-channel thermocouple data logger with cold junction compensation
+                                and industrial isolation.
+                            </p>
+                            <div class="project-tags">
+                                <span class="project-tag">Thermocouple</span>
+                                <span class="project-tag">Isolated</span>
+                                <span class="project-tag">Industrial</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Other Projects -->
+            <div class="projects-category">
+                <h2>Other Hardware</h2>
+                <div class="projects-grid">
+                    <article class="project-card placeholder fade-in">
+                        <div class="project-image">
+                            <span class="text-muted">Coming Soon</span>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">Power</span>
+                            <h3 class="project-title">Bench Power Supply</h3>
+                            <p class="project-description">
+                                Programmable bench power supply with digital control, current limiting,
+                                and USB/serial interface.
+                            </p>
+                            <div class="project-tags">
+                                <span class="project-tag">SMPS</span>
+                                <span class="project-tag">STM32</span>
+                                <span class="project-tag">USB-C PD</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card placeholder fade-in">
+                        <div class="project-image">
+                            <span class="text-muted">Coming Soon</span>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">RF</span>
+                            <h3 class="project-title">SDR Frontend</h3>
+                            <p class="project-description">
+                                Wideband RF frontend for software-defined radio applications with
+                                LNA, filtering, and frequency conversion.
+                            </p>
+                            <div class="project-tags">
+                                <span class="project-tag">RF</span>
+                                <span class="project-tag">SDR</span>
+                                <span class="project-tag">Wideband</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Andrew. Built with vanilla HTML, CSS, and JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>
