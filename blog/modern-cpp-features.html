@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="C++17 and C++20 features that have made my embedded and systems code cleaner and more maintainable">
+    <title>Modern C++ Features I Actually Use | Andrew</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">andrew<span>.</span></a>
+
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../blog.html" class="active">Blog</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header container">
+        <a href="../blog.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Blog
+        </a>
+
+        <h1>Modern C++ Features I Actually Use</h1>
+
+        <div class="article-meta">
+            <span>September 2024</span>
+            <span>6 min read</span>
+        </div>
+    </header>
+
+    <!-- Hero Image -->
+    <div class="article-hero container">
+        <img src="../images/blog/cpp-features.jpg" alt="Code on screen"
+             onerror="this.style.display='none'">
+    </div>
+
+    <!-- Article Content -->
+    <article class="article-content container">
+
+        <p>
+            C++ has evolved significantly since C++11, but a lot of embedded and systems code is still stuck
+            in the C++03 era. Here are the modern C++ features (C++17/20) that have actually made it into my
+            daily workflow - features that make code cleaner without runtime overhead.
+        </p>
+
+        <h2>Structured Bindings (C++17)</h2>
+
+        <p>
+            This is probably the feature I use most often. Structured bindings let you unpack tuples, pairs,
+            and structs into named variables in a single declaration.
+        </p>
+
+        <h3>Before</h3>
+        <pre><code>std::map&lt;int, std::string&gt; device_map;
+// ...
+for (auto it = device_map.begin(); it != device_map.end(); ++it) {
+    int id = it->first;
+    std::string name = it->second;
+    // use id and name
+}</code></pre>
+
+        <h3>After</h3>
+        <pre><code>std::map&lt;int, std::string&gt; device_map;
+// ...
+for (const auto& [id, name] : device_map) {
+    // use id and name directly
+}</code></pre>
+
+        <p>
+            This also works great with functions that return multiple values:
+        </p>
+
+        <pre><code>auto [success, error_code] = initialize_device();
+if (!success) {
+    log_error(error_code);
+    return;
+}</code></pre>
+
+        <h2>std::optional (C++17)</h2>
+
+        <p>
+            No more magic sentinel values or out-parameters for "maybe has a value" situations.
+            <code>std::optional</code> makes the intent explicit in the type system.
+        </p>
+
+        <h3>Before</h3>
+        <pre><code>// Returns -1 if device not found (magic value)
+int find_device_id(const std::string& name);
+
+// Or using out-parameter
+bool find_device_id(const std::string& name, int* out_id);</code></pre>
+
+        <h3>After</h3>
+        <pre><code>std::optional&lt;int&gt; find_device_id(const std::string& name);
+
+// Usage
+if (auto id = find_device_id("sensor_1")) {
+    configure_device(*id);
+}</code></pre>
+
+        <p>
+            The beauty is that the API is self-documenting. You can't accidentally use an uninitialized
+            value because the type forces you to check.
+        </p>
+
+        <h2>if constexpr (C++17)</h2>
+
+        <p>
+            Compile-time conditionals that actually remove code paths. Essential for template metaprogramming
+            and writing code that adapts to different platforms.
+        </p>
+
+        <pre><code>template&lt;typename T&gt;
+void process_data(T value) {
+    if constexpr (std::is_integral_v&lt;T&gt;) {
+        // Integer-specific processing
+        value &= 0xFF;
+    } else if constexpr (std::is_floating_point_v&lt;T&gt;) {
+        // Float-specific processing
+        value = std::clamp(value, 0.0, 1.0);
+    }
+    // Common processing...
+}</code></pre>
+
+        <p>
+            Unlike regular <code>if</code>, the non-taken branch doesn't even need to compile for the
+            given type. No more SFINAE gymnastics for simple cases.
+        </p>
+
+        <h2>std::string_view (C++17)</h2>
+
+        <p>
+            A non-owning view into a string. Perfect for function parameters when you just need to read
+            string data without copying.
+        </p>
+
+        <pre><code>// Before: forces copy if called with string literal
+void log_message(const std::string& msg);
+
+// After: zero-copy for literals and existing strings
+void log_message(std::string_view msg);</code></pre>
+
+        <p>
+            I use this extensively in parsing code where I'm just examining substrings without modifying them.
+            The performance difference is measurable on embedded systems.
+        </p>
+
+        <h2>constexpr Everywhere (C++17/20)</h2>
+
+        <p>
+            <code>constexpr</code> functions have become much more powerful. In C++20, you can even use
+            <code>std::vector</code> and <code>std::string</code> in constexpr contexts.
+        </p>
+
+        <pre><code>constexpr uint32_t crc32_table[256] = /* computed at compile time */;
+
+constexpr uint32_t compute_crc32(std::string_view data) {
+    uint32_t crc = 0xFFFFFFFF;
+    for (char c : data) {
+        crc = crc32_table[(crc ^ c) & 0xFF] ^ (crc >> 8);
+    }
+    return crc ^ 0xFFFFFFFF;
+}
+
+// CRC computed at compile time!
+constexpr auto firmware_crc = compute_crc32("firmware_v1.0");</code></pre>
+
+        <p>
+            Moving computation from runtime to compile time is free performance, and the compiler
+            verifies correctness.
+        </p>
+
+        <h2>Designated Initializers (C++20)</h2>
+
+        <p>
+            Finally, named initialization for structs like C99 has had for decades.
+        </p>
+
+        <pre><code>struct DeviceConfig {
+    uint32_t baud_rate;
+    uint8_t data_bits;
+    uint8_t stop_bits;
+    bool parity_enable;
+};
+
+// Clear, self-documenting initialization
+DeviceConfig config = {
+    .baud_rate = 115200,
+    .data_bits = 8,
+    .stop_bits = 1,
+    .parity_enable = false
+};</code></pre>
+
+        <p>
+            Much better than positional initialization where you're counting commas and hoping you got
+            the order right.
+        </p>
+
+        <h2>std::span (C++20)</h2>
+
+        <p>
+            Like <code>string_view</code> but for arrays. A non-owning view into contiguous data.
+        </p>
+
+        <pre><code>// Works with arrays, vectors, or any contiguous container
+void process_samples(std::span&lt;const int16_t&gt; samples) {
+    for (auto sample : samples) {
+        // process...
+    }
+}
+
+// All of these work:
+int16_t raw_buffer[256];
+std::vector&lt;int16_t&gt; vec_buffer;
+std::array&lt;int16_t, 128&gt; arr_buffer;
+
+process_samples(raw_buffer);
+process_samples(vec_buffer);
+process_samples(arr_buffer);</code></pre>
+
+        <p>
+            This is a game-changer for embedded code where you're constantly passing buffer pointers
+            and sizes separately.
+        </p>
+
+        <h2>Range-based for with Init Statement (C++20)</h2>
+
+        <p>
+            A small quality-of-life improvement: you can now declare variables in the for loop that
+            are scoped to the loop.
+        </p>
+
+        <pre><code>for (auto& registry = get_device_registry(); auto& [id, device] : registry) {
+    device.update();
+}</code></pre>
+
+        <h2>What I Don't Use (Yet)</h2>
+
+        <p>
+            Not every new feature makes sense for embedded/systems work:
+        </p>
+
+        <ul>
+            <li><strong>Coroutines</strong> - Powerful but complex. Not worth it for most embedded use cases.</li>
+            <li><strong>Modules</strong> - Toolchain support is still spotty. Sticking with headers for now.</li>
+            <li><strong>Concepts</strong> - Useful for library code, overkill for application code.</li>
+            <li><strong>Ranges library</strong> - Elegant but compile times suffer. Maybe when compilers improve.</li>
+        </ul>
+
+        <h2>Compiler Support</h2>
+
+        <p>
+            All of the features I've listed work with:
+        </p>
+
+        <ul>
+            <li>GCC 10+ (ARM and x86)</li>
+            <li>Clang 12+</li>
+            <li>MSVC 2019+ (for Windows tooling)</li>
+        </ul>
+
+        <p>
+            If your embedded toolchain is stuck on GCC 7 or older, it might be time for an upgrade.
+            The productivity gains from modern C++ are worth the migration effort.
+        </p>
+
+        <h2>Conclusion</h2>
+
+        <p>
+            Modern C++ isn't about adding complexity - it's about expressing intent more clearly while
+            maintaining zero-cost abstractions. The features I've highlighted all compile to efficient
+            code while making the source more readable and less error-prone.
+        </p>
+
+        <p>
+            Start small. Pick one feature, use it for a week, and see how it feels. My recommendation:
+            start with structured bindings and <code>std::optional</code>. They're immediately useful
+            and require minimal mental overhead.
+        </p>
+
+        <!-- Tags -->
+        <div class="article-tags">
+            <span class="article-tag">C++</span>
+            <span class="article-tag">Programming</span>
+            <span class="article-tag">Embedded</span>
+        </div>
+
+    </article>
+
+    <!-- Post Navigation -->
+    <nav class="post-nav container">
+        <a href="fpga-workflow.html" class="prev">
+            <span class="label">Previous Post</span>
+            <span class="title">Optimizing My FPGA Build Workflow</span>
+        </a>
+        <div></div>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Andrew. Built with vanilla HTML, CSS, and JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+</body>
+</html>

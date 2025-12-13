@@ -1,0 +1,8 @@
+# robots.txt for Andrew's Portfolio
+# https://www.robotstxt.org/
+
+User-agent: *
+Allow: /
+
+# Sitemap location (update domain when deployed)
+Sitemap: https://yourdomain.com/sitemap.xml

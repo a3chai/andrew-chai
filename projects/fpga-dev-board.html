@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Custom FPGA development board with Xilinx Ultrascale+ SoM, DDR4, and high-speed interfaces">
+    <title>FPGA Development Board | Andrew</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Altium 365 Viewer -->
+    <script src="https://viewer.altium.com/client/static/js/embed.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">andrew<span>.</span></a>
+
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../projects.html" class="active">Projects</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <header class="project-header">
+        <div class="container">
+            <a href="../projects.html" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Projects
+            </a>
+
+            <h1>FPGA Development Board</h1>
+            <p class="subtitle">Custom carrier board for Xilinx Ultrascale+ SoM</p>
+
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Category</span>
+                    <span class="meta-value">FPGA Development</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Status</span>
+                    <span class="meta-value">In Progress</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">PCB Layers</span>
+                    <span class="meta-value">12 Layer</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Tools</span>
+                    <span class="meta-value">Altium Designer</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Altium 365 Viewer Section -->
+    <section class="altium-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Interactive PCB Viewer</h2>
+                <p class="section-subtitle">Explore the schematic, PCB layout, and 3D model</p>
+            </div>
+
+            <!-- View Tabs -->
+            <div class="view-tabs">
+                <button class="view-tab active" data-view="sch">Schematic</button>
+                <button class="view-tab" data-view="pcb">PCB Layout</button>
+                <button class="view-tab" data-view="3d">3D View</button>
+            </div>
+
+            <!-- Altium Viewer Container -->
+            <div class="altium-viewer-container">
+                <!--
+                    =====================================================
+                    ALTIUM 365 EMBED INSTRUCTIONS
+                    =====================================================
+
+                    To add your PCB viewer:
+
+                    1. Go to https://365.altium.com and sign in
+                    2. Upload your project ZIP file to your Personal Space
+                    3. Open the project and click "Share" -> "Embed"
+                    4. Copy the embed code and replace this placeholder
+
+                    Option A - iframe embed (recommended):
+                    <iframe
+                        src="https://personal-viewer.365.altium.com/client/index.html?feature=embed&source=YOUR-PROJECT-ID&activeView=SCH"
+                        width="100%"
+                        height="700"
+                        style="overflow:hidden;border:none;"
+                        allowfullscreen="true">
+                    </iframe>
+
+                    Option B - JavaScript embed:
+                    <div class="altium-ecad-viewer"
+                         data-project-src="https://your-url.com/project.zip"
+                         data-enabled-views="sch,pcb,3d,bom"
+                         data-active-view="3d"
+                         style="height: 700px;">
+                    </div>
+
+                    =====================================================
+                -->
+
+                <!-- Placeholder - replace with your Altium embed -->
+                <div class="altium-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                        <path d="M6 8h4M6 11h2"/>
+                        <circle cx="16" cy="9.5" r="2"/>
+                    </svg>
+                    <p>
+                        <strong>Altium 365 Viewer</strong><br>
+                        Interactive PCB viewer will be embedded here.<br>
+                        <span class="text-muted">Upload your project to Altium 365 to enable.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <main class="project-body">
+        <div class="container">
+
+            <!-- Overview Section -->
+            <section class="project-section">
+                <h2>Overview</h2>
+                <p>
+                    This custom carrier board is designed to interface with Xilinx Ultrascale+ system-on-module (SoM)
+                    platforms, providing a complete development environment for high-speed digital designs. The board
+                    features multiple high-speed interfaces, DDR4 memory, and flexible I/O options for prototyping
+                    and evaluation.
+                </p>
+                <p>
+                    The design focuses on signal integrity for multi-gigabit transceivers, proper power sequencing
+                    for the FPGA fabric, and thermal management for sustained high-performance operation.
+                </p>
+            </section>
+
+            <!-- Features Section -->
+            <section class="project-section">
+                <h2>Key Features</h2>
+                <ul>
+                    <li>Xilinx Ultrascale+ SoM connector (high-density Samtec)</li>
+                    <li>DDR4 SODIMM socket supporting up to 16GB</li>
+                    <li>4x SFP+ cages for 10Gbps optical/copper connectivity</li>
+                    <li>PCIe Gen3 x8 edge connector</li>
+                    <li>USB 3.0 Type-C with USB-PD support</li>
+                    <li>Gigabit Ethernet with IEEE 1588 PTP support</li>
+                    <li>JTAG and UART debug interfaces</li>
+                    <li>Onboard power management with sequencing</li>
+                    <li>FMC HPC connector for expansion</li>
+                </ul>
+            </section>
+
+            <!-- Technical Specs -->
+            <section class="project-section">
+                <h2>Technical Specifications</h2>
+                <table class="specs-table">
+                    <tr>
+                        <th>Board Dimensions</th>
+                        <td>170mm x 170mm (Mini-ITX form factor)</td>
+                    </tr>
+                    <tr>
+                        <th>Layer Count</th>
+                        <td>12 layers (6 signal, 4 plane, 2 mixed)</td>
+                    </tr>
+                    <tr>
+                        <th>Stack-up</th>
+                        <td>Megtron 6 / FR4 hybrid for controlled impedance</td>
+                    </tr>
+                    <tr>
+                        <th>Min Trace/Space</th>
+                        <td>3.5mil / 3.5mil</td>
+                    </tr>
+                    <tr>
+                        <th>Via Technology</th>
+                        <td>Blind/buried vias, back-drilled stubs</td>
+                    </tr>
+                    <tr>
+                        <th>Power Input</th>
+                        <td>12V DC barrel jack or USB-C PD (up to 100W)</td>
+                    </tr>
+                    <tr>
+                        <th>Power Rails</th>
+                        <td>0.85V, 1.0V, 1.2V, 1.8V, 2.5V, 3.3V, 5.0V</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Design Challenges -->
+            <section class="project-section">
+                <h2>Design Challenges</h2>
+
+                <h3>High-Speed Signal Integrity</h3>
+                <p>
+                    The GTY transceivers operate at up to 16Gbps, requiring careful attention to trace geometry,
+                    reference planes, and via transitions. I used Altium's PDN analyzer and 3D field solver to
+                    optimize the channel characteristics.
+                </p>
+
+                <h3>Power Distribution</h3>
+                <p>
+                    With over 50A peak current draw, the PDN required extensive decoupling and low-impedance
+                    power planes. The FPGA core voltage uses a 6-phase buck converter with adaptive voltage
+                    positioning.
+                </p>
+
+                <h3>Thermal Management</h3>
+                <p>
+                    Active cooling is provided through a custom heatsink mounting system. Thermal vias under
+                    power components and proper copper pours help distribute heat across the board.
+                </p>
+            </section>
+
+            <!-- Gallery Section -->
+            <section class="project-section">
+                <h2>Gallery</h2>
+                <div class="project-gallery">
+                    <div class="gallery-item">
+                        <img src="../images/projects/fpga-board-3d.jpg" alt="3D render of FPGA board"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--color-text-muted);\'>3D Render</div>'">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/projects/fpga-board-pcb.jpg" alt="PCB layout view"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--color-text-muted);\'>PCB Layout</div>'">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/projects/fpga-board-sch.jpg" alt="Schematic capture"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--color-text-muted);\'>Schematic</div>'">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project Navigation -->
+            <nav class="project-nav">
+                <div></div>
+                <a href="strain-gauge-logger.html" class="next">
+                    <span class="label">Next Project</span>
+                    <span class="title">Strain Gauge Data Logger</span>
+                </a>
+            </nav>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Andrew. Built with vanilla HTML, CSS, and JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Container (created by JS) -->
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+</body>
+</html>
