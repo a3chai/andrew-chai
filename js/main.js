@@ -7,6 +7,14 @@
     'use strict';
 
     // ==========================================
+    // Dynamic Copyright Year
+    // ==========================================
+    const yearElement = document.getElementById('current-year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+
+    // ==========================================
     // Mobile Navigation Toggle
     // ==========================================
     const navToggle = document.querySelector('.nav-toggle');

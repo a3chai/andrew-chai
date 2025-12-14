@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Travel adventures and photo galleries from around the world">
+    <title>Travel | Andrew</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin="">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">andrew<span>.</span></a>
+
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../blog.html" class="active">Blog</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="../blog.html" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Blog
+            </a>
+            <h1>Travel</h1>
+            <p>Photo journals from adventures around the world</p>
+        </div>
+    </header>
+
+    <!-- Interactive World Map Section -->
+    <section class="travel-map-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Where I've Been</h2>
+                <p class="section-subtitle">Click a pin to jump to that trip</p>
+            </div>
+            <div id="travel-map" class="travel-map"></div>
+        </div>
+    </section>
+
+    <!-- Trip Sections -->
+    <main class="section">
+        <div class="container">
+
+            <!-- Trip: Switzerland -->
+            <article id="trip-switzerland" class="trip-section fade-in">
+                <div class="trip-header">
+                    <div class="trip-info">
+                        <span class="trip-location">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            Switzerland
+                        </span>
+                        <h2 class="trip-title">The Swiss Alps</h2>
+                    </div>
+                    <div class="trip-meta">
+                        <span class="trip-date">June 2024</span>
+                        <span class="trip-duration">2 weeks</span>
+                    </div>
+                </div>
+                <p class="trip-description">
+                    Two weeks exploring the Bernese Oberland, from the dramatic cliffs of
+                    Lauterbrunnen to the glaciers above Grindelwald. Highlights included
+                    the Eiger Trail and watching sunrise from Schynige Platte.
+                </p>
+                <div class="trip-gallery">
+                    <div class="gallery-item">
+                        <img src="../images/travel/switzerland/photo1.jpg"
+                             alt="Lauterbrunnen Valley"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:200px;color:var(--color-text-muted);background:var(--color-bg-secondary);border-radius:var(--radius-md);\'>Photo</div>'">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/travel/switzerland/photo2.jpg"
+                             alt="Eiger North Face"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:250px;color:var(--color-text-muted);background:var(--color-bg-secondary);border-radius:var(--radius-md);\'>Photo</div>'">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/travel/switzerland/photo3.jpg"
+                             alt="Grindelwald village"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:180px;color:var(--color-text-muted);background:var(--color-bg-secondary);border-radius:var(--radius-md);\'>Photo</div>'">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/travel/switzerland/photo4.jpg"
+                             alt="Alpine sunrise"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:220px;color:var(--color-text-muted);background:var(--color-bg-secondary);border-radius:var(--radius-md);\'>Photo</div>'">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/travel/switzerland/photo5.jpg"
+                             alt="Mountain railway"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:200px;color:var(--color-text-muted);background:var(--color-bg-secondary);border-radius:var(--radius-md);\'>Photo</div>'">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/travel/switzerland/photo6.jpg"
+                             alt="Lake reflection"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:240px;color:var(--color-text-muted);background:var(--color-bg-secondary);border-radius:var(--radius-md);\'>Photo</div>'">
+                    </div>
+                </div>
+            </article>
+
+            <!-- Trip: Japan -->
+            <article id="trip-japan" class="trip-section fade-in">
+                <div class="trip-header">
+                    <div class="trip-info">
+                        <span class="trip-location">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            Japan
+                        </span>
+                        <h2 class="trip-title">Cherry Blossom Season</h2>
+                    </div>
+                    <div class="trip-meta">
+                        <span class="trip-date">April 2024</span>
+                        <span class="trip-duration">3 weeks</span>
+                    </div>
+                </div>
+                <p class="trip-description">
+                    Chasing cherry blossoms from Tokyo to Kyoto. The timing was perfect -
+                    full bloom in Ueno Park, serene temples in Nara, and the unforgettable
+                    Philosopher's Path lined with pink petals.
+                </p>
+                <div class="trip-gallery">
+                    <div class="gallery-item">
+                        <img src="../images/travel/japan/photo1.jpg"
+                             alt="Cherry blossoms in Tokyo"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:220px;color:var(--color-text-muted);background:var(--color-bg-secondary);border-radius:var(--radius-md);\'>Photo</div>'">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/travel/japan/photo2.jpg"
+                             alt="Kyoto temple"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:180px;color:var(--color-text-muted);background:var(--color-bg-secondary);border-radius:var(--radius-md);\'>Photo</div>'">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/travel/japan/photo3.jpg"
+                             alt="Nara deer"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:200px;color:var(--color-text-muted);background:var(--color-bg-secondary);border-radius:var(--radius-md);\'>Photo</div>'">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/travel/japan/photo4.jpg"
+                             alt="Philosopher's Path"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:250px;color:var(--color-text-muted);background:var(--color-bg-secondary);border-radius:var(--radius-md);\'>Photo</div>'">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/travel/japan/photo5.jpg"
+                             alt="Mount Fuji"
+                             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:190px;color:var(--color-text-muted);background:var(--color-bg-secondary);border-radius:var(--radius-md);\'>Photo</div>'">
+                    </div>
+                </div>
+            </article>
+
+            <!-- Add more trips here following the same pattern -->
+            <!-- Each trip needs:
+                 1. An entry in js/travel-map.js trips array
+                 2. An article with id="trip-{slug}" matching the trips array id
+            -->
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Andrew. Built with vanilla HTML, CSS, and JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <!-- Main JS -->
+    <script src="../js/main.js"></script>
+
+    <!-- Travel Map JS -->
+    <script src="../js/travel-map.js"></script>
+</body>
+</html>
