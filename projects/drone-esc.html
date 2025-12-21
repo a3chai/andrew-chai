@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Flight Controller PCB project showcasing the design and features of a custom flight controller board.">
-    <title>Flight Controller PCB | Andrew</title>
+    <meta name="description" content="Drone ESC project showcasing the design and features of a custom electronic speed controller.">
+    <title>Drone ESC | Andrew</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,17 +45,17 @@
                 Back to Projects
             </a>
 
-            <h1>Strain Gauge Data Logger</h1>
-            <p class="subtitle">Multi-channel precision data acquisition system</p>
+            <h1>Drone ESC</h1>
+            <p class="subtitle">High-performance electronic speed controller for brushless motors</p>
 
             <div class="project-meta">
                 <div class="meta-item">
                     <span class="meta-label">Date</span>
-                    <span class="meta-value">December 2024</span>
+                    <span class="meta-value">Fall 2024</span>
                 </div>
                 <div class="meta-item">
                     <span class="meta-label">Status</span>
-                    <span class="meta-value">Prototype</span>
+                    <span class="meta-value">In Progress</span>
                 </div>
                 <div class="meta-item">
                     <span class="meta-label">PCB Layers</span>
@@ -79,10 +79,11 @@
 
             <!-- Altium Viewer Container -->
             <div class="altium-viewer-container">
-                <iframe src="https://personal-viewer.365.altium.com/client/index.html?feature=embed&source=A25AEAD4-B7EF-45FD-A9B5-DB5AADC40613&activeView=3D" width="1280" height="720" style="overflow:hidden;border:none;width:100%;height:720px;" scrolling="no" allowfullscreen="true" onload="window.top.scrollTo(0,0);"></iframe>
+                <iframe src="https://personal-viewer.365.altium.com/client/index.html?feature=embed&source=276E8E82-6A36-464C-90F3-A3D58FC86C2E&activeView=3D" width="1280" height="720" style="overflow:hidden;border:none;width:100%;height:720px;" scrolling="no" allowfullscreen="true" onload="window.top.scrollTo(0,0);"></iframe>
             </div>
         </div>
     </section>
+
 
     <!-- Project Content -->
     <main class="project-body">
@@ -92,15 +93,13 @@
             <section class="project-section">
                 <h2>Overview</h2>
                 <p>
-                    The Strain Gauge Data Logger is a precision multi-channel data acquisition system designed
-                    for capturing strain gauge measurements in structural testing applications. It features
-                    8 independent channels, each with a dedicated 24-bit sigma-delta ADC, programmable gain
-                    instrumentation amplifier, and Wheatstone bridge excitation.
+                    The Drone ESC is a high-performance electronic speed controller designed for brushless
+                    DC motors used in drone and UAV applications. It features advanced FOC (Field Oriented
+                    Control) algorithms for smooth and efficient motor control.
                 </p>
                 <p>
-                    Data is streamed over USB to a host PC for real-time visualization and logging.
-                    The system supports sampling rates up to 1kSPS per channel with simultaneous acquisition
-                    across all channels.
+                    The design prioritizes power efficiency, thermal management, and fast response times
+                    to meet the demanding requirements of multirotor flight controllers.
                 </p>
             </section>
 
@@ -108,15 +107,14 @@
             <section class="project-section">
                 <h2>Key Features</h2>
                 <ul>
-                    <li>8 independent measurement channels</li>
-                    <li>24-bit sigma-delta ADCs (ADS1256 or similar)</li>
-                    <li>Programmable gain from 1x to 128x</li>
-                    <li>Precision voltage reference with &lt;5ppm/°C drift</li>
-                    <li>Isolated Wheatstone bridge excitation (2.5V or 5V)</li>
-                    <li>Quarter, half, and full bridge support</li>
-                    <li>USB 2.0 FS interface with CDC class</li>
-                    <li>Optional SD card logging for standalone operation</li>
-                    <li>STM32F4 microcontroller for data processing</li>
+                    <li>Field Oriented Control (FOC) for smooth operation</li>
+                    <li>High current capability with efficient MOSFETs</li>
+                    <li>Integrated current sensing for protection</li>
+                    <li>DShot and PWM signal compatibility</li>
+                    <li>Active braking support</li>
+                    <li>Thermal protection with temperature monitoring</li>
+                    <li>Compact form factor for drone integration</li>
+                    <li>STM32G4 microcontroller for fast control loops</li>
                 </ul>
             </section>
 
@@ -125,36 +123,32 @@
                 <h2>Technical Specifications</h2>
                 <table class="specs-table">
                     <tr>
-                        <th>Channels</th>
-                        <td>8 differential inputs</td>
+                        <th>Voltage Range</th>
+                        <td>3S-6S LiPo (11.1V - 25.2V)</td>
                     </tr>
                     <tr>
-                        <th>Resolution</th>
-                        <td>24-bit (effective ~20-bit at max gain)</td>
+                        <th>Continuous Current</th>
+                        <td>35A</td>
                     </tr>
                     <tr>
-                        <th>Sample Rate</th>
-                        <td>Up to 1kSPS per channel (simultaneous)</td>
+                        <th>Burst Current</th>
+                        <td>45A (10s)</td>
                     </tr>
                     <tr>
-                        <th>Input Range</th>
-                        <td>±10mV to ±5V (programmable)</td>
+                        <th>Control Protocol</th>
+                        <td>DShot150/300/600, PWM</td>
                     </tr>
                     <tr>
-                        <th>Excitation</th>
-                        <td>2.5V or 5V, 50mA max per channel</td>
+                        <th>PWM Frequency</th>
+                        <td>Up to 48kHz</td>
                     </tr>
                     <tr>
-                        <th>Interface</th>
-                        <td>USB 2.0 Full Speed (12Mbps)</td>
-                    </tr>
-                    <tr>
-                        <th>Power</th>
-                        <td>USB powered or 9-12V DC input</td>
+                        <th>MCU</th>
+                        <td>STM32G431</td>
                     </tr>
                     <tr>
                         <th>Board Size</th>
-                        <td>100mm x 80mm</td>
+                        <td>30mm x 30mm</td>
                     </tr>
                 </table>
             </section>
@@ -163,26 +157,25 @@
             <section class="project-section">
                 <h2>Design Details</h2>
 
-                <h3>Analog Frontend</h3>
+                <h3>Power Stage</h3>
                 <p>
-                    Each channel features a precision instrumentation amplifier (INA333) followed by a
-                    dedicated ADC. The bridge excitation is provided by a precision current source to
-                    minimize errors from lead resistance. Anti-aliasing is handled by a 2nd-order
-                    Butterworth filter before the ADC.
+                    The power stage uses low RDS(on) MOSFETs in a half-bridge configuration for each
+                    motor phase. Gate drivers with bootstrap circuits ensure fast switching times
+                    while minimizing switching losses.
                 </p>
 
-                <h3>Grounding and Isolation</h3>
+                <h3>Current Sensing</h3>
                 <p>
-                    The analog and digital sections are separated with a split ground plane, joined at a
-                    single point under the ADC. Bridge excitation can optionally be isolated using onboard
-                    DC-DC converters and digital isolators for applications requiring galvanic isolation.
+                    Phase currents are measured using low-side shunt resistors with dedicated
+                    current sense amplifiers. This enables precise FOC control and overcurrent
+                    protection.
                 </p>
 
-                <h3>Calibration</h3>
+                <h3>Thermal Management</h3>
                 <p>
-                    The system includes onboard calibration routines for offset and gain correction.
-                    A precision shunt calibration resistor can be switched in for automated sensitivity
-                    calibration of each channel.
+                    The PCB uses thick copper layers and thermal vias to conduct heat away from
+                    the MOSFETs. An onboard temperature sensor enables thermal throttling to
+                    prevent damage under extreme conditions.
                 </p>
             </section>
 
@@ -191,15 +184,15 @@
                 <h2>Gallery</h2>
                 <div class="project-gallery">
                     <div class="gallery-item">
-                        <img src="../images/projects/strain-gauge-3d.jpg" alt="3D render"
+                        <img src="../images/projects/esc-3d.jpg" alt="3D render"
                              onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--color-text-muted);\'>3D Render</div>'">
                     </div>
                     <div class="gallery-item">
-                        <img src="../images/projects/strain-gauge-pcb.jpg" alt="PCB layout"
+                        <img src="../images/projects/esc-pcb.jpg" alt="PCB layout"
                              onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--color-text-muted);\'>PCB Layout</div>'">
                     </div>
                     <div class="gallery-item">
-                        <img src="../images/projects/strain-gauge-test.jpg" alt="Test setup"
+                        <img src="../images/projects/esc-test.jpg" alt="Test setup"
                              onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--color-text-muted);\'>Test Setup</div>'">
                     </div>
                 </div>
@@ -207,11 +200,14 @@
 
             <!-- Project Navigation -->
             <nav class="project-nav">
-                <a href="fpga-dev-board.html" class="prev">
+                <a href="flight-controller.html" class="prev">
                     <span class="label">Previous Project</span>
-                    <span class="title">FPGA Development Board</span>
+                    <span class="title">Flight Controller</span>
                 </a>
-                <div></div>
+                <a href="power-module.html" class="next">
+                    <span class="label">Next Project</span>
+                    <span class="title">High Current Power Module</span>
+                </a>
             </nav>
 
         </div>

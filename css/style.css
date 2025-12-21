@@ -507,6 +507,14 @@ img {
 
 .project-content {
     padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
 }
 
 .project-category {
@@ -551,6 +559,8 @@ img {
     gap: 0.5rem;
     font-size: 0.9rem;
     font-weight: 500;
+    margin-top: auto;
+    padding-top: var(--spacing-sm);
 }
 
 .project-link svg {
